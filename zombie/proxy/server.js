@@ -46,5 +46,5 @@ net.createServer(function (stream){
   });
 
 }).listen(process.argv[2], function(){
-    console.log('Zombie.js server running on ' + process.argv[2] + '...');
+    // console.log('Zombie.js server running on ' + process.argv[2] + '...');
 });

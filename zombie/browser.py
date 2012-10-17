@@ -69,6 +69,18 @@ class Browser(BaseNode):
         """
         return self._node('query', selector, context)
 
+    def xpath(self, selector, context=None):
+        """
+        Evaluate an xpath selector against the document (or an optional context
+        :class:`zombie.dom.DOMNode`) and return a single
+        :class:`zombie.dom.DOMNode` object.
+
+        :param selector: a string xpath selector
+                        (http://zombie.labnotes.org/selectors)
+        :param context: an (optional) instance of :class:`zombie.dom.DOMNode`
+        """
+        return self._node('xpath', selector, context)
+
     def queryAll(self, selector, context=None):
         """
         Evaluate a CSS selector against the document (or an optional context
@@ -114,6 +126,55 @@ class Browser(BaseNode):
         Returns the :class:`zombie.browser.Browser` to allow function chaining.
         """
         self.client.wait('clickLink', selector)
+        return self
+
+    def choose(self, selector):
+        """
+        Chooses an option. The first argument is the link text or CSS selector.
+
+        :param selector: an optional string CSS selector
+                        (http://zombie.labnotes.org/selectors) or inner text
+
+        Returns the :class:`zombie.browser.Browser` to allow function chaining.
+        """
+        self.client.wait('choose', selector)
+        return self
+
+    def check(self, selector):
+        """
+        Checks an input. The first argument is the link text or CSS selector.
+
+        :param selector: an optional string CSS selector
+                        (http://zombie.labnotes.org/selectors) or inner text
+
+        Returns the :class:`zombie.browser.Browser` to allow function chaining.
+        """
+        self.client.wait('check', selector)
+        return self
+
+    def uncheck(self, selector):
+        """
+        Unchecks an input. The first argument is the link text or CSS selector.
+
+        :param selector: an optional string CSS selector
+                        (http://zombie.labnotes.org/selectors) or inner text
+
+        Returns the :class:`zombie.browser.Browser` to allow function chaining.
+        """
+        self.client.wait('uncheck', selector)
+        return self
+
+
+    def select(self, field, value):
+        """
+        selects an option. The first argument is the link text or CSS selector.
+
+        :param field: field name
+        :param value: the field value
+
+        Returns the :class:`zombie.browser.Browser` to allow function chaining.
+        """
+        self.client.wait('select', field, value)
         return self
 
     @property

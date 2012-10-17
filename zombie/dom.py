@@ -177,7 +177,7 @@ class DOMNode(BaseNode):
     #
     # Inherited functionality
     #
-    def query(self, selector):
+    def query(self, selector, context=None):
         """
         Evaluate a CSS selector against this element and return a single
         (child) :class:`zombie.dom.DOMNode` object.
@@ -185,9 +185,11 @@ class DOMNode(BaseNode):
         :param selector: a string CSS selector
                         (http://zombie.labnotes.org/selectors)
         """
-        return self._node('query', selector, self._native)
+        if not context:
+            context = self._native
+        return self._node('query', selector, context)
 
-    def queryAll(self, selector):
+    def queryAll(self, selector, context=None):
         """
         Evaluate a CSS selector against this element and return a list of
         (child) :class:`zombie.dom.DOMNode` objects.
@@ -195,7 +197,9 @@ class DOMNode(BaseNode):
         :param selector: a string CSS selector
                         (http://zombie.labnotes.org/selectors)
         """
-        return self._nodes('queryAll', selector, self._native)
+        if not context:
+            context = self._native
+        return self._nodes('queryAll', selector, context)
 
     def css(self, selector):
         """
